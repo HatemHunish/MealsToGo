@@ -13,12 +13,23 @@ export const restaurants = [
   {
     isClosedTemporarily: true,
     photos: [
-        `https://media.istockphoto.com/id/1401693515/cs/fotografie/p%C5%99%C3%A1tel%C3%A9-kte%C5%99%C3%AD-si-u%C5%BE%C3%ADvaj%C3%AD-sd%C3%ADlen%C3%AD-vegansk%C3%A9ho-sushi-v-m%C3%ADstn%C3%AD-restauraci.jpg?s=612x612&w=0&k=20&c=YNxxFiev_qTmzakthGBE7jI8W5msqjrWzJ79R7S-sF0=`
-        ],
+      `https://media.istockphoto.com/id/1401693515/cs/fotografie/p%C5%99%C3%A1tel%C3%A9-kte%C5%99%C3%AD-si-u%C5%BE%C3%ADvaj%C3%AD-sd%C3%ADlen%C3%AD-vegansk%C3%A9ho-sushi-v-m%C3%ADstn%C3%AD-restauraci.jpg?s=612x612&w=0&k=20&c=YNxxFiev_qTmzakthGBE7jI8W5msqjrWzJ79R7S-sF0=`,
+    ],
     name: 'Sushi Spot',
-    icon:'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
+    icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
     address: '456 Elm St',
-    rating: 5,    
+    rating: 5,
     delivery: '20-30 min',
-  }
+  },
+  {
+    isClosedTemporarily: false,
+    photos: [
+      `https://media.istockphoto.com/id/1401693515/cs/fotografie/p%C5%99%C3%A1tel%C3%A9-kte%C5%99%C3%AD-si-u%C5%BE%C3%ADvaj%C3%AD-sd%C3%ADlen%C3%AD-vegansk%C3%A9ho-sushi-v-m%C3%ADstn%C3%AD-restauraci.jpg?s=612x612&w=0&k=20&c=YNxxFiev_qTmzakthGBE7jI8W5msqjrWzJ79R7S-sF0=`,
+    ],
+    name: 'Noodle House',
+    icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
+    address: '789 Oak St',
+    rating: 5,
+    delivery: '20-60 min',
+  },
 ];

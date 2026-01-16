@@ -9,6 +9,7 @@ import { ThemeProvider } from 'styled-components/native';
 import { theme } from './src/infrastructure/theme';
 import { Text, View } from 'react-native';
 import { SafeAreaContainer } from './src/components/utility/safe-area.component';
+import { RestaurantsContextProvider } from './src/services/resturants/resturants.context';
 
 const Tab = createBottomTabNavigator();
 
@@ -53,15 +54,17 @@ export default function App() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <Tab.Navigator screenOptions={createScreenOptions}>
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <RestaurantsContextProvider>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <Tab.Navigator screenOptions={createScreenOptions}>
+              <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </RestaurantsContextProvider>
     </ThemeProvider>
   );
 }
