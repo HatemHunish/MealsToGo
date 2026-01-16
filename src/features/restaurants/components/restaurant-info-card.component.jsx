@@ -1,9 +1,8 @@
-import React from 'react';
-import { Text } from '../../../components/typography/text.component';
 import { SvgXml } from 'react-native-svg';
-import star from '../../../../assets/star';
 import open from '../../../../assets/open';
+import star from '../../../../assets/star';
 import { Spacer } from '../../../components/spacer/spacer.component';
+import { Text } from '../../../components/typography/text.component';
 import {
   CardContent,
   CardCover,
@@ -15,7 +14,8 @@ import {
 } from './restaurant-info-card.styles';
 
 export const RestaurantInfoCard = ({ restaurant }) => {
-  const { name, icon, photos, address, isOpenNow, rating, isClosedTemporarily } = restaurant;
+  const { name, icon, photos, address, isOpenNow, rating, isClosedTemporarily, placeId } =
+    restaurant;
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
     <ResturantCard elevation={2}>
@@ -26,7 +26,7 @@ export const RestaurantInfoCard = ({ restaurant }) => {
           <Section>
             <Text>
               {ratingArray.map((_, i) => (
-                <SvgXml key={i} xml={star} width={20} height={20} />
+                <SvgXml key={`${placeId}-${i}`} xml={star} width={20} height={20} />
               ))}
             </Text>
             <SectionEnd>
@@ -49,5 +49,3 @@ export const RestaurantInfoCard = ({ restaurant }) => {
     </ResturantCard>
   );
 };
-
-

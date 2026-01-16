@@ -1,5 +1,5 @@
-import { Card } from "react-native-paper";
-import styled from "styled-components/native";
+import { Card } from 'react-native-paper';
+import styled from 'styled-components/native';
 
 export const Details = styled.View`
   flex-direction: row;
@@ -7,13 +7,13 @@ export const Details = styled.View`
 `;
 
 export const ResturantCard = styled(Card)`
-margin-bottom: ${({theme}) => theme.space[3]};
-  margin-left: ${({theme}) => theme.space[2]};
-  margin-right: ${({theme}) => theme.space[2]};
-  background-color: ${({theme}) => theme.colors.bg.primary};
+  margin-bottom: ${({ theme }) => theme.space[3]};
+  margin-left: ${({ theme }) => theme.space[2]};
+  margin-right: ${({ theme }) => theme.space[2]};
+  background-color: ${({ theme }) => theme.colors.bg.primary};
 `;
 export const CardContent = styled.View`
-  padding: ${({theme}) => theme.space[3]};
+  padding: ${({ theme }) => theme.space[3]};
 `;
 export const CardCover = styled(Card.Cover)`
   /* padding: 16px; */
