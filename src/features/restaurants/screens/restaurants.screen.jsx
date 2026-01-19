@@ -9,7 +9,7 @@ import { RestaurantsContext } from '../../../services/resturants/resturants.cont
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import Search from '../components/search.component';
 
-const ResturantCardList = styled(FlatList).attrs(({ theme }) => ({
+const ResturantCardList = styled(FlatList).attrs(() => ({
   contentContainerStyle: { padding: 16 },
 }))``;
 

@@ -1,7 +1,6 @@
-import React, { use } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { useTheme } from 'styled-components/native';
-import { space } from '../../infrastructure/theme/spacing';
 const sizeVariant = {
   small: 1,
   medium: 2,

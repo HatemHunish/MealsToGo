@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { locationRequest, locationTransform } from './location.service';
 export const LocationContext = createContext();
 
@@ -12,6 +12,9 @@ export const LocationContextProvider = ({ children }) => {
     if (!keyword.length) {
       return;
     }
+  };
+
+  useEffect(() => {
     setIsLoading(true);
     setKeyword(keyword);
     locationRequest(keyword)
@@ -25,7 +28,7 @@ export const LocationContextProvider = ({ children }) => {
         setIsLoading(false);
         setError(err);
       });
-  };
+  }, [keyword]);
 
   return (
     <LocationContext.Provider

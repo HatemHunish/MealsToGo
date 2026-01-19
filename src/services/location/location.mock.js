@@ -21,7 +21,7 @@ export const locations = {
       },
     ],
   },
-  "san francisco": {
+  'san francisco': {
     results: [
       {
         geometry: {
@@ -33,7 +33,7 @@ export const locations = {
         },
       },
     ],
-    status: "OK",
+    status: 'OK',
   },
   chicago: {
     results: [
