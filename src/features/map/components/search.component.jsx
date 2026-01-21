@@ -4,6 +4,10 @@ import styled from 'styled-components/native';
 import { LocationContext } from '../../../services/location/location.context';
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  z-index: 999;
 `;
 const SearchBarCustom = styled(Searchbar)`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
@@ -21,6 +25,7 @@ export default function Search() {
       <SearchBarCustom
         placeholder="Search for a location"
         onChangeText={setSearchQuery}
+        icon={'map'}
         onSubmitEditing={() => {
           search(searchQuery);
         }}

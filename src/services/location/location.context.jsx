@@ -12,6 +12,8 @@ export const LocationContextProvider = ({ children }) => {
     if (!keyword.length) {
       return;
     }
+    setKeyword(keyword);
+    setIsLoading(true);
   };
 
   useEffect(() => {

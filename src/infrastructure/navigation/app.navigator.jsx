@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Text } from 'react-native';
 import { SafeAreaContainer } from '../../components/utility/safe-area.component';
 
+import { MapScreen } from '../../features/map/screen/map.screen';
 import { RestaurantsNavigator } from './restaurants.navigator';
 const Tab = createBottomTabNavigator();
 
@@ -28,11 +29,6 @@ function SettingsScreen() {
   );
 }
 
-const MapScreen = () => (
-  <SafeAreaContainer>
-    <Text>Map Screen</Text>
-  </SafeAreaContainer>
-);
 export default function AppNavigator() {
   return (
     <NavigationContainer>
