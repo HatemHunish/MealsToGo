@@ -1,6 +1,6 @@
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { useContext } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { SafeAreaContainer } from '../../../components/utility/safe-area.component';
@@ -22,9 +22,9 @@ const LoadingContainer = styled.View`
   left: 50%;
   transform: translate(-25px, -25px);
 `;
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
-  // console.log(restaurantsContext);
+  console.log(navigation);
 
   return (
     <>
@@ -35,9 +35,16 @@ export const RestaurantsScreen = () => {
           </LoadingContainer>
         )}
         <Search />
+
         <ResturantCardList
           data={restaurants}
-          renderItem={({ item }) => <RestaurantInfoCard restaurant={item} />}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}
+            >
+              <RestaurantInfoCard restaurant={item} />
+            </TouchableOpacity>
+          )}
           keyExtractor={(item, index) => item.name + index}
         />
       </SafeAreaContainer>
