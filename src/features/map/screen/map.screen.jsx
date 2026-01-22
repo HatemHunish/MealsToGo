@@ -1,10 +1,10 @@
-import { useContext } from 'react';
-import { Platform } from 'react-native';
+import { useContext, useState } from 'react';
+import { Platform, TouchableOpacity } from 'react-native';
 import MapView, { Callout, Marker } from 'react-native-maps';
 import styled from 'styled-components/native';
 import { LocationContext } from '../../../services/location/location.context';
 import { RestaurantsContext } from '../../../services/resturants/resturants.context';
-import MapCallOut from '../components/map-callout.component';
+import MapCallOut, { MapCallOutOverlay } from '../components/map-callout.component';
 import Search from '../components/search.component';
 
 const Map = styled(MapView)`
@@ -12,12 +12,16 @@ const Map = styled(MapView)`
   width: 100%;
 `;
 const isAndroid = Platform.OS === 'android';
-export const MapScreen = () => {
+export const MapScreen = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants } = useContext(RestaurantsContext);
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const { lat, lng, viewport } = location;
   const latDelta = viewport.northeast.lat - viewport.southwest.lat;
 
+  const handleCalloutPress = (restaurant) => {
+    navigation.navigate('Restaurants', { screen: 'RestaurantDetail', params: { restaurant } });
+  };
   return (
     <>
       <Search />
@@ -38,14 +42,20 @@ export const MapScreen = () => {
                 latitude: restaurant.geometry.location.lat,
                 longitude: restaurant.geometry.location.lng,
               }}
+              onPress={() => setSelectedRestaurant(restaurant)}
             >
-              <Callout tooltip={isAndroid}>
+              <Callout tooltip onPress={() => handleCalloutPress(restaurant)}>
                 <MapCallOut restaurant={restaurant} />
               </Callout>
             </Marker>
           );
         })}
       </Map>
+      {selectedRestaurant && isAndroid && (
+        <TouchableOpacity onPress={() => handleCalloutPress(selectedRestaurant)}>
+          <MapCallOutOverlay restaurant={selectedRestaurant} />
+        </TouchableOpacity>
+      )}
     </>
   );
 };

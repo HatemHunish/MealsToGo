@@ -23,7 +23,7 @@ export const LocationContextProvider = ({ children }) => {
       .then(locationTransform)
       .then((loc) => {
         setLocation(loc);
-        console.log(loc);
+        // console.log(loc);
         setIsLoading(false);
       })
       .catch((err) => {

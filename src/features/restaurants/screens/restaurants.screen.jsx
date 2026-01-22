@@ -24,7 +24,7 @@ const LoadingContainer = styled.View`
 `;
 export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
-  console.log(navigation);
+  // console.log(navigation);
 
   return (
     <>
