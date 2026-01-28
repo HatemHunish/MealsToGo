@@ -1,6 +1,5 @@
 import js from "@eslint/js";
-import prettierConfig from 'eslint-config-prettier';
-import prettier from 'eslint-plugin-prettier';
+// import prettierConfig from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactNative from 'eslint-plugin-react-native';
@@ -15,6 +14,7 @@ export default defineConfig([
       globals: {
         ...globals.es2021,
         console: 'readonly',
+        require: 'readonly',
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
         setInterval: 'readonly',
@@ -31,14 +31,14 @@ export default defineConfig([
       react,
       'react-hooks': reactHooks,
       'react-native': reactNative,
-      prettier,
+      // prettier,
     },
     rules: {
       /* Core */
       ...js.configs.recommended.rules,
       /* Prettier */
       ...prettierConfig.rules,
-      'prettier/prettier': 'error',
+      // 'prettier/prettier': 'error',
       /* React */
       ...react.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off', // React 17+

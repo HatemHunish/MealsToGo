@@ -20,7 +20,7 @@ export const MapScreen = ({ navigation }) => {
   const latDelta = viewport.northeast.lat - viewport.southwest.lat;
 
   const handleCalloutPress = (restaurant) => {
-    navigation.navigate('Restaurants', { screen: 'RestaurantDetail', params: { restaurant } });
+    navigation.navigate('RestaurantDetail', { restaurant: restaurant });
   };
   return (
     <>

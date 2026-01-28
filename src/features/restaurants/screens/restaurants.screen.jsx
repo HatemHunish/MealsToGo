@@ -1,10 +1,13 @@
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import styled from 'styled-components/native';
+import { FadeInView } from '../../../components/animations/fade.animation';
+import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
 import { SafeAreaContainer } from '../../../components/utility/safe-area.component';
 import { colors } from '../../../infrastructure/theme/colors';
+import { FavouritesContext } from '../../../services/favourites/favourites.context';
 import { RestaurantsContext } from '../../../services/resturants/resturants.context';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import Search from '../components/search.component';
@@ -24,8 +27,12 @@ const LoadingContainer = styled.View`
 `;
 export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading } = useContext(RestaurantsContext);
+  const { favourites } = useContext(FavouritesContext);
+  const [showFavourites, setShowFavourites] = useState(false);
   // console.log(navigation);
-
+  const goToRestaurantDetail = (restaurant) => {
+    navigation.navigate('RestaurantDetail', { restaurant: restaurant });
+  };
   return (
     <>
       <SafeAreaContainer>
@@ -34,15 +41,21 @@ export const RestaurantsScreen = ({ navigation }) => {
             <Loading size={50} animating={true} color={colors.brand.primary} />
           </LoadingContainer>
         )}
-        <Search />
+        <Search
+          icon={showFavourites ? 'heart' : 'heart-outline'}
+          onIconPress={() => setShowFavourites(!showFavourites)}
+        />
+        {showFavourites && (
+          <FavouritesBar favourites={favourites} goToDetails={goToRestaurantDetail} />
+        )}
 
         <ResturantCardList
           data={restaurants}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}
-            >
-              <RestaurantInfoCard restaurant={item} />
+            <TouchableOpacity onPress={() => goToRestaurantDetail(item)}>
+              <FadeInView>
+                <RestaurantInfoCard restaurant={item} />
+              </FadeInView>
             </TouchableOpacity>
           )}
           keyExtractor={(item, index) => item.name + index}

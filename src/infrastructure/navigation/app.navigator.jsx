@@ -1,11 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import { Text } from 'react-native';
-import { SafeAreaContainer } from '../../components/utility/safe-area.component';
 
 import { MapScreen } from '../../features/map/screen/map.screen';
+
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { RestaurantDetailScreen } from '../../features/restaurants/screens/restaurant-detail.screen';
+import { FavouritesContextProvider } from '../../services/favourites/favourites.context';
+import { LocationContextProvider } from '../../services/location/location.context';
+import { RestaurantsContextProvider } from '../../services/resturants/resturants.context';
 import { RestaurantsNavigator } from './restaurants.navigator';
+import { SettingsNavigator } from './settings.navigator';
 const Tab = createBottomTabNavigator();
 
 const TAB_ICONS = {
@@ -21,22 +25,30 @@ const createScreenOptions = ({ route }) => ({
     <Ionicons name={TAB_ICONS[route.name]} size={size} color={color} />
   ),
 });
-function SettingsScreen() {
-  return (
-    <SafeAreaContainer>
-      <Text>Settings Screen</Text>
-    </SafeAreaContainer>
-  );
-}
-
+const AppTabs = () => (
+  <Tab.Navigator screenOptions={createScreenOptions}>
+    <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+    <Tab.Screen name="Map" component={MapScreen} />
+    <Tab.Screen name="Settings" component={SettingsNavigator} />
+  </Tab.Navigator>
+);
+const RootStack = createStackNavigator();
 export default function AppNavigator() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={createScreenOptions}>
-        <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-        <Tab.Screen name="Map" component={MapScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <LocationContextProvider>
+      <RestaurantsContextProvider>
+        <FavouritesContextProvider>
+          <RootStack.Navigator
+            screenOptions={{
+              headerShown: false,
+              ...TransitionPresets.ModalPresentationIOS,
+            }}
+          >
+            <RootStack.Screen name="AppTabs" component={AppTabs} />
+            <RootStack.Screen name="RestaurantDetail" component={RestaurantDetailScreen} />
+          </RootStack.Navigator>
+        </FavouritesContextProvider>
+      </RestaurantsContextProvider>
+    </LocationContextProvider>
   );
 }

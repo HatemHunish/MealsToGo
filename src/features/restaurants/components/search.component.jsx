@@ -10,7 +10,7 @@ const SearchBarCustom = styled(Searchbar)`
   background-color: ${(props) => props.theme.colors.bg.primary};
   margin-bottom: ${(props) => props.theme.space[3]};
 `;
-export default function Search() {
+export default function Search({ icon, onIconPress }) {
   const { keyword, search } = useContext(LocationContext);
   const [searchQuery, setSearchQuery] = useState(keyword);
   useEffect(() => {
@@ -19,6 +19,8 @@ export default function Search() {
   return (
     <SearchContainer>
       <SearchBarCustom
+        icon={icon}
+        onIconPress={onIconPress}
         placeholder="Search for a location"
         onChangeText={setSearchQuery}
         onSubmitEditing={() => {
