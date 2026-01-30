@@ -1,13 +1,9 @@
 import camelize from 'camelize';
-import { locations } from './location.mock';
+import { BACKEND_URL, isMock } from '../../utils/env';
 
 export const locationRequest = (searchTerm) => {
-  return new Promise((resolve, reject) => {
-    const location = locations[searchTerm.toLowerCase()];
-    if (!location) {
-      reject('Location not found');
-    }
-    resolve(location);
+  return fetch(`${BACKEND_URL}/geocode?city=${searchTerm}&mock=${isMock}`).then((res) => {
+    return res.json();
   });
 };
 

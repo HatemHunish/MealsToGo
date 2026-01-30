@@ -15,15 +15,14 @@ export const RestaurantsContextProvider = ({ children }) => {
       setRestaurants([]);
       try {
         // Simulate an API call
-        setTimeout(async () => {
-          restaurantsRequest(locationString)
-            .then(restaurantsTransform)
-            .then((results) => {
-              const transformedResults = results;
-              setRestaurants(transformedResults);
-              setIsLoading(false);
-            });
-        }, 2000);
+
+        restaurantsRequest(locationString)
+          .then(restaurantsTransform)
+          .then((results) => {
+            const transformedResults = results;
+            setRestaurants(transformedResults);
+            setIsLoading(false);
+          });
       } catch (err) {
         setError(err);
         setIsLoading(false);

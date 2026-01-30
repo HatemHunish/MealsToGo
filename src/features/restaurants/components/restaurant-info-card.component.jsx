@@ -17,11 +17,16 @@ import {
 export const RestaurantInfoCard = ({ restaurant }) => {
   const { name, icon, photos, address, isOpenNow, rating, isClosedTemporarily, placeId } =
     restaurant;
-  const ratingArray = Array.from(new Array(Math.floor(rating)));
+  const ratingArray = Array.from(new Array(Math.floor(rating || 0)));
+
   return (
     <ResturantCard elevation={2}>
       <Favourite restaurant={restaurant} />
-      <CardCover source={{ uri: photos[0] }} />
+      <CardCover
+        source={{
+          uri: photos?.[0],
+        }}
+      />
       <CardContent>
         <Text variant="label">{name}</Text>
         <Details>
